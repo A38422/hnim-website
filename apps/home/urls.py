@@ -11,6 +11,9 @@ urlpatterns = [
     # The home page
     path('', views.index, name='home'),
 
+    # The product detail
+    path('product-detail/<int:pk>', views.product_detail, name='product_detail'),
+
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),
 

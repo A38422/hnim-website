@@ -8,13 +8,21 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
+from apps.product.models import Product
 
 
 @login_required(login_url="/login/")
 def index(request):
-    context = {'segment': 'index'}
+    context = {'segment': 'index', 'Products': Product.objects.all()}
 
     html_template = loader.get_template('home/index.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+@login_required(login_url="/login/")
+def product_detail(request, pk):
+    context = {'product': Product.objects.get(id=pk)}
+    html_template = loader.get_template('home/product/product-detail.html')
     return HttpResponse(html_template.render(context, request))
 
 

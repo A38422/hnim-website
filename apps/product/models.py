@@ -7,7 +7,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     code = models.CharField(max_length=12)
     price = models.IntegerField()
-    image = models.ImageField(upload_to='')
+    image = models.TextField()
     color = models.CharField(max_length=20)
     size = models.CharField(max_length=5)
     type = models.CharField(max_length=20)
