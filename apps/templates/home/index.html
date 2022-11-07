@@ -63,9 +63,9 @@
 <div class="container-sm">
     <div class="nav">
         {% for product in Products %}
-        <div class="flex-column mx-3 my-2 hover-zoom">
+        <div class="flex-column mx-3 my-2">
             <button class="btn btn-outline-info" style="padding: 0 !important; border: none !important">
-                <a href="{% url 'product_detail' product.id %}" class="HoverDiv">
+                <a href="{% url 'product_detail' product.id %}">
                     <img src="{{ product.image }}" width="282" height="423" alt="" class="cursor-pointer">
                 </a>
             </button>

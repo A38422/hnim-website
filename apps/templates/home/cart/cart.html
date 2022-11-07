@@ -1,0 +1,57 @@
+{% extends 'layouts/base-presentation.html' %}
+
+{% block title %} Product {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} index-page {% endblock body_class %}
+
+{% block content %}
+<header class="header-2">
+    <div class="page-header relative" style="min-height: 20vh">
+
+    </div>
+</header>
+
+<!-- -------- START Content ------- -->
+<div class="container-sm">
+        <table class="table">
+            <tr>
+                <th scope="col" id="img"></th>
+                <th scope="col" id="product">Sản phẩm</th>
+                <th scope="col" id="amount">Số lượng</th>
+                <th scope="col" id="price">Giá tiền</th>
+                <th scope="col" id="actions">Hành động</th>
+            </tr>
+            {% for amount_product in carts %}
+                <tr>
+                    <th>
+                        <img src="{{ amount_product.product.image }}" alt="">
+                    </th>
+                    <th>{{ amount_product.product.name }} {{ amount_product.product.code }}</th>
+                    <th>{{ amount_product.amount }}</th>
+                    <th>{{ amount_product.product.price }}</th>
+                    <th>
+                        <button class="btn">
+                            Xóa
+                        </button>
+                    </th>
+                </tr>
+            {% endfor %}
+        </table>
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+
+<script src="{{ ASSETS_ROOT }}/js/plugins/countup.min.js"></script>
+<script src="{{ ASSETS_ROOT }}/js/plugins/choices.min.js"></script>
+<script src="{{ ASSETS_ROOT }}/js/plugins/rellax.min.js"></script>
+<script src="{{ ASSETS_ROOT }}/js/plugins/tilt.min.js"></script>
+<script src="{{ ASSETS_ROOT }}/js/plugins/choices.min.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+<script src="{{ ASSETS_ROOT }}/js/soft-design-system.min.js?v=1.0.1" type="text/javascript"></script>
+
+{% endblock javascripts %}
