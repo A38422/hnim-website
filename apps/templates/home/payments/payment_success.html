@@ -1,0 +1,50 @@
+{% extends 'layouts/base-presentation.html' %}
+
+{% block title %} Product {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} index-page {% endblock body_class %}
+
+{% block content %}
+<header class="header-2">
+    <div class="page-header relative" style="min-height: 20vh">
+
+    </div>
+</header>
+
+<!-- -------- START Content ------- -->
+<div class="container-sm">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+            <div class="card border-0 p-2 p-md-3 p-lg-5">
+                <div class="card-header bg-white border-0 text-center">
+                    <img alt="" src="{{ ASSETS_ROOT }}/img/payment/icon-success.png" width="70px">
+                </div>
+                <div class="card-body pt-0 text-center font-weight-bold" style="color: #32ba7c; font-size: 26px">
+                    Thanh toán thành công!
+                </div>
+                <div class="d-grid text-center">
+                    <a href="{% url 'home' %}">
+                        <button type="submit" class="btn btn-outline-primary">Trở về trang chủ</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+
+<script src="{{ ASSETS_ROOT }}/js/plugins/countup.min.js"></script>
+<script src="{{ ASSETS_ROOT }}/js/plugins/choices.min.js"></script>
+<script src="{{ ASSETS_ROOT }}/js/plugins/rellax.min.js"></script>
+<script src="{{ ASSETS_ROOT }}/js/plugins/tilt.min.js"></script>
+<script src="{{ ASSETS_ROOT }}/js/plugins/choices.min.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+<script src="{{ ASSETS_ROOT }}/js/soft-design-system.min.js?v=1.0.1" type="text/javascript"></script>
+
+{% endblock javascripts %}

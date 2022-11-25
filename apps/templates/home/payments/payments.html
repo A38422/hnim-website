@@ -1,0 +1,75 @@
+{% extends 'layouts/base-presentation.html' %}
+
+{% block title %} Product {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} index-page {% endblock body_class %}
+
+{% block content %}
+<header class="header-2">
+    <div class="page-header relative" style="min-height: 20vh">
+
+    </div>
+</header>
+
+<!-- -------- START Content ------- -->
+<div class="container-sm">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+            <div class="card border-0 p-2 p-md-3 p-lg-5">
+                <div class="card-header bg-white border-0 text-center">
+                    <h2>Thanh toán</h2>
+                </div>
+                <div class="card-body pt-0">
+                    <form method="POST" action="{% url 'submit_payment' %}">
+                        {% csrf_token %}
+                        {% if error %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error }}
+                            </div>
+                        {% endif %}
+                        <div class="mb-4">
+                            <label>Họ và tên</label>
+                            <div class="input-group">
+                              <input name="fullname" type="text" class="form-control text-dark font-weight-bold" style="font-size: 16px">
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label>Số điện thoại</label>
+                            <div class="input-group">
+                              <input name="phone" type="text" class="form-control text-dark font-weight-bold" style="font-size: 16px">
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label>Địa chỉ</label>
+                            <div class="input-group">
+                              <input name="address" type="text" class="form-control text-dark font-weight-bold" style="font-size: 16px">
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <a href="{% url 'submit_payment' %}">
+                                <button type="submit" class="btn btn-success">Xác nhận</button>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+
+<script src="{{ ASSETS_ROOT }}/js/plugins/countup.min.js"></script>
+<script src="{{ ASSETS_ROOT }}/js/plugins/choices.min.js"></script>
+<script src="{{ ASSETS_ROOT }}/js/plugins/rellax.min.js"></script>
+<script src="{{ ASSETS_ROOT }}/js/plugins/tilt.min.js"></script>
+<script src="{{ ASSETS_ROOT }}/js/plugins/choices.min.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+<script src="{{ ASSETS_ROOT }}/js/soft-design-system.min.js?v=1.0.1" type="text/javascript"></script>
+
+{% endblock javascripts %}

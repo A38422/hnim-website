@@ -11,10 +11,11 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     code = models.CharField(max_length=12)
     price = models.IntegerField()
-    image = models.TextField()
+    image = models.CharField(max_length=255)
     color = models.CharField(max_length=20)
     size = models.CharField(max_length=5)
     type = models.CharField(max_length=20)
+    description = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
@@ -46,7 +47,7 @@ class Cart(models.Model):
 
 
 def validate_phone(value):
-    if not re.match('(84|0[3|5|7|8|9])+([0-9]{8})\b', value):
+    if not re.match('(84|0[3|5|7|8|9])+([0-9]{8})', value):
         raise ValidationError(
             _('%(value)s is not phone number'),
             params={'value': value},
@@ -58,6 +59,7 @@ class Transaction(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     is_paid = models.BooleanField(default=False)
     address = models.CharField(max_length=255)
+    fullname = models.CharField(max_length=255)
     phone = models.CharField(max_length=15, validators=[validate_phone])
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)

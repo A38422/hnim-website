@@ -24,22 +24,36 @@
                 <th scope="col" id="price">Giá tiền</th>
                 <th scope="col" id="actions">Hành động</th>
             </tr>
-            {% for amount_product in carts %}
+            {% for cart in carts %}
+                {% for amount_product in cart.products.all %}
                 <tr>
                     <th>
-                        <img src="{{ amount_product.product.image }}" alt="">
+                        <img src="{{ amount_product.product.image }}" alt="" width="100px">
                     </th>
                     <th>{{ amount_product.product.name }} {{ amount_product.product.code }}</th>
                     <th>{{ amount_product.amount }}</th>
-                    <th>{{ amount_product.product.price }}</th>
+                    <th>{{ amount_product.product.price }}đ</th>
                     <th>
-                        <button class="btn">
-                            Xóa
-                        </button>
+                        <a href="{% url 'remove_cart' amount_product.product.pk %}">
+                            <button class="btn btn-danger">
+                                Xóa
+                            </button>
+                        </a>
                     </th>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <th scope="row"></th>
+                    <th scope="row">Tổng tiền: {{ cart.get_bill }}đ</th>
+                    <td></td>
                 </tr>
             {% endfor %}
         </table>
+        <a class="btn btn-success text-white" style="float: right" href="{% url 'payment' %}">
+            Thanh toán
+        </a>
 </div>
 {% endblock content %}
 
