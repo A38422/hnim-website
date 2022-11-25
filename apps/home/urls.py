@@ -16,9 +16,11 @@ urlpatterns = [
 
     path('remove-cart/<int:pk>', views.remove_cart, name='remove_cart'),
 
+    re_path('search/', views.search_product, name='search_product'),
+
     re_path(r'^products/(?P<type>\w{0,50})/$', views.filter_product, name='filter_product'),
 
-    re_path(r'^search(?P<search>\w{0,50})/$', views.search_product, name='search_product'),
+    # re_path(r'^search(?P<search>\w{0,50})/$', views.search_product, name='search_product'),
 
     re_path(r'^.*\.*', views.pages, name='pages'),
 

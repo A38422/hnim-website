@@ -32,7 +32,8 @@ def filter_product(request, type):
 
 
 @login_required(login_url="/login/")
-def search_product(request, search):
+def search_product(request):
+    search = request.GET['search']
     context = {'segment': 'index', 'Products': Product.objects.filter(
         Q(name__icontains=search) | Q(code__icontains=search)
     )}
