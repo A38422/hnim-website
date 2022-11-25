@@ -129,8 +129,8 @@ def submit_payment(request):
         transaction.phone = request.POST['phone']
         transaction.save()
 
-        cart.products = None
-        cart.save()
+        # cart.products.delete()
+        # cart.delete()
 
         html_template = loader.get_template('home/payments/payment_success.html')
         return HttpResponse(html_template.render(context, request))
