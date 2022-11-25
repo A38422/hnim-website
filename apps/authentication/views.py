@@ -24,9 +24,9 @@ def login_view(request):
                 login(request, user)
                 return redirect("/")
             else:
-                msg = 'Invalid credentials'
+                msg = 'Thông tin đăng nhập không hợp lệ!'
         else:
-            msg = 'Error validating the form'
+            msg = 'Lỗi khi xác thực đăng nhập'
 
     return render(request, "accounts/login.html", {"form": form, "msg": msg})
 
@@ -43,13 +43,14 @@ def register_user(request):
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
 
-            msg = 'User created - please <a href="/login">login</a>.'
+            msg = 'Tạo tài khoản thành công - Vui lòng <a href="/login" ' \
+                  'class="text-primary text-gradient font-weight-bold">Đăng nhập!</a>.'
             success = True
 
             # return redirect("/login/")
 
         else:
-            msg = 'Form is not valid'
+            msg = 'Thông tin không hợp lệ!'
     else:
         form = SignUpForm()
 

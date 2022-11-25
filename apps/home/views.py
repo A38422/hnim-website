@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.template import loader
 from django.urls import reverse, reverse_lazy
 from django.http import Http404
+from django.db.models import Q
 from apps.product.models import Product, Cart, AmountProductsCart, Transaction
 import re
 
@@ -25,7 +26,16 @@ def product_detail(request, pk):
 
 @login_required(login_url="/login/")
 def filter_product(request, type):
-    context = {'segment': 'index', 'Products': Product.objects.all().filter(type=type)}
+    context = {'segment': 'index', 'Products': Product.objects.filter(type=type)}
+    html_template = loader.get_template('home/index.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+@login_required(login_url="/login/")
+def search_product(request, search):
+    context = {'segment': 'index', 'Products': Product.objects.filter(
+        Q(name__icontains=search) | Q(code__icontains=search)
+    )}
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
 
@@ -80,9 +90,9 @@ def remove_cart(request, pk):
         cart.products.remove(amount_product)
         cart.save()
     amount_product.amount = 0
+    amount_product.save()
     cart.products.remove(amount_product)
     cart.save()
-    amount_product.save()
 
     return redirect(reverse_lazy('cart'))
 
@@ -129,8 +139,12 @@ def submit_payment(request):
         transaction.phone = request.POST['phone']
         transaction.save()
 
-        # cart.products.delete()
-        # cart.delete()
+        amount_products = AmountProductsCart.objects.all().filter(owner=user)
+        for amount_product in amount_products:
+            amount_product.amount = 0
+            amount_product.save()
+            cart.products.remove(amount_product)
+            cart.save()
 
         html_template = loader.get_template('home/payments/payment_success.html')
         return HttpResponse(html_template.render(context, request))
